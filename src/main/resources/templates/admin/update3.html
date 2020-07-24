@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head th:replace="admin/_fragments :: head(~{::title})">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>重置密码</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/semantic-ui/2.2.4/semantic.min.css">
+    <link rel="stylesheet" href="../../static/css/me.css">
+
+</head>
+<body class="centered column">
+<div class="ui   center aligned   column " style="background-color: teal;padding: 20px">
+    <div class="content row">
+        <h1 class=" black center aligned ui  header item" style="color: white;">Blog-后台管理-找回密码</h1>
+    </div>
+</div>
+<div class="ui attached  segment">
+    <div class="ui stackable grid ">
+        <div class="four wide column ">
+            <div class="ui ordered steps">
+                <div class="completed  step">
+                    <div class="content">
+                        <div class="title"><a href="" th:href="@{/admin}"style="color: black">返回登录</a></div>
+                    </div>
+                </div>
+                <div class="completed  step">
+                    <div class="content">
+                        <div class="title">安全认证</div>
+                    </div>
+                </div>
+                <div class="completed step">
+                    <div class="content">
+                        <div class="title">重置密码</div>
+                    </div>
+                </div>
+                <div class="active step">
+                    <div class="content">
+                        <div class="title">修改完成</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="m-container m-padded-tb-massive" style="max-width: 30em !important;">
+    <div class="ui middle aligned center  grid ">
+        <div class="row">
+            <h3 style="padding:20px; font-size:25px;color:teal;">
+            <span style="text-align: center">修改成功</span>
+            <p style="color:teal;">
+                <span id="second" style="color: red;font-size: 30px" >5</span>秒后自动为您转跳 <a href="" th:href="@{/admin}">登录</a> 页
+            </p>
+            </h3>
+        </div>
+    </div>
+
+</div>
+<th:block th:replace="admin/_fragments :: script">
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.2/dist/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/semantic-ui/2.2.4/semantic.min.js"></script>
+</th:block>
+<script>
+
+    $('.ui .form').form({
+        fields: {
+            password1: {
+                identifier: 'password1',
+                rules: [{
+                    type: 'empty',
+                    prompt: '请设置密码'
+                }]
+            },
+            password2: {
+                identifier: 'password2',
+                rules: [{
+                    type: 'empty',
+                    prompt: '请再次设置密码'
+                }]
+            }
+        }
+    });
+    var interval;
+
+    window.onload = function() {
+        interval = window.setInterval("changeSecond()", 1000);
+    };
+    function changeSecond() {
+        var second = document.getElementById("second");
+
+        var svalue = second.innerHTML;
+
+        svalue = svalue - 1;
+
+        if (svalue == 0) {
+            window.clearInterval(interval);
+            location.href ='/admin';
+            return;
+        }
+        second.innerHTML = svalue;
+    }
+
+</script>
+</body>
+</html>

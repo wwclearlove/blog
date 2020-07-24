@@ -1,0 +1,44 @@
+[{
+
+  "typeName":"左顾右盼",
+  "frequency":10,
+  "interval":10,
+  "isMonitor":true
+},
+  {
+    "typeName":"疲劳状态",
+    "frequency":10,
+    "interval":10,
+    "isMonitor":true
+  },
+  {
+    "typeName":"打电话",
+    "frequency":10,
+    "interval":10,
+    "isMonitor":true
+  },
+  {
+    "typeName":"非司机人员",
+    "frequency":10,
+    "interval":10,
+    "isMonitor":true
+  },
+  {
+    "typeName":"视野偏离",
+    "frequency":10,
+    "interval":10,
+    "isMonitor":true
+  },
+  {
+    "typeName":"抽烟",
+    "frequency":10,
+    "interval":10,
+    "isMonitor":true
+  }
+
+]
+
+
+
+
+

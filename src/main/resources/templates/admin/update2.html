@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head th:replace="admin/_fragments :: head(~{::title})">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>重置密码</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/semantic-ui/2.2.4/semantic.min.css">
+    <link rel="stylesheet" href="../../static/css/me.css">
+
+</head>
+<body class="centered column">
+<div class="ui   center aligned   column " style="background-color: teal;padding: 20px">
+    <div class="content row">
+        <h1 class=" black center aligned ui  header item" style="color: white;">Blog-后台管理-找回密码</h1>
+    </div>
+</div>
+<div class="ui attached  segment">
+    <div class="ui stackable grid ">
+        <div class="four wide column m-mobile-hide">
+            <div class="ui ordered steps">
+                <div class="completed  step">
+                    <div class="content">
+                        <div class="title"><a href="" th:href="@{/admin}" style="color: black">返回登录</a></div>
+                    </div>
+                </div>
+                <div class="completed  step">
+                    <div class="content">
+                        <div class="title">安全认证</div>
+                    </div>
+                </div>
+                <div class="active step">
+                    <div class="content">
+                        <div class="title">重置密码</div>
+                    </div>
+                </div>
+                <div class="disabled step">
+                    <div class="content">
+                        <div class="title">修改完成</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="m-container m-padded-tb-massive" style="max-width: 30em !important;">
+    <div class="ui middle aligned center  grid ">
+        <div class="column ">
+            <div class="ui  form segment large">
+                    <div class="field">
+                        <div class="ui left icon input">
+                            <i class="lock icon"></i>
+                            <input type="password" id="password1" name="password1" placeholder="请重新设置密码.....">
+                            <div class="ui corner label">
+                                <i class="icon asterisk"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="field">
+                        <div class="ui left icon input">
+                        <i class="lock icon"></i>
+                        <input type="password" id="password2" name="password2" placeholder="请再次设置密码.....">
+                        <div class="ui corner label">
+                            <i class="icon asterisk"></i>
+                        </div>
+                    </div>
+                    </div>
+                    <button class="ui fluid large teal submit button" id="sub">提交</button>
+
+                <div class="ui error mini message"></div>
+
+            </div>
+
+        </div>
+    </div>
+
+</div>
+<th:block th:replace="admin/_fragments :: script">
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.2/dist/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/semantic-ui/2.2.4/semantic.min.js"></script>
+</th:block>
+<script>
+    $("#sub").click(function(){
+        var data1 = $("#password1").val();
+        var data2 = $("#password2").val();
+        if (data1!=data2){
+            alert("你输入的两次密码不一致")
+        }else {
+            $.ajax({
+                url: "/send/sz",//请求路径
+                type: "POST",//请求方式
+                data: {"password1": data1,"password2": data2},//请求参数方式二
+                success: function (data) {
+                    if (data == "success") {
+                        window.location.href = "/admin/xg3"
+                    } else {
+                        alert(data)
+                    }
+
+                },//响应成功后回调函数
+                error: function () {
+                    alert("服务器错误");
+                },//表示请求响应出现错误，执行的回调函数
+                dataType: "text"//设置接收到响应数据的格式
+            });
+        }
+    })
+
+    $('.ui .form').form({
+        fields: {
+            password1: {
+                identifier: 'password1',
+                rules: [{
+                    type: 'empty',
+                    prompt: '请设置密码'
+                }]
+            },
+            password2: {
+                identifier: 'password2',
+                rules: [{
+                    type: 'empty',
+                    prompt: '请再次设置密码'
+                }]
+            }
+        }
+    });
+</script>
+</body>
+</html>

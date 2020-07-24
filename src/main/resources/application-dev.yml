@@ -1,0 +1,30 @@
+spring:
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://39.106.123.27:3306/blog?useUnicode=true&characterEncoding=utf-8
+    username: root
+    password: wei934992
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+
+logging:
+  level:
+    root: warn
+    com.lrm: debug
+  file: log/blog-dev.log
+server:
+  port: 80
+path:
+  fileurl: http://39.106.123.27:81/
+  file-upload-path: D:/test/zc/file/
+  monitor-config-location: config/monitor/ #监测参数配置文件存放位置,加上file-upload-path构成完整路径
+fdfs:
+  connect-timeout: 1200
+  so-timeout: 1500
+  thumbImage:
+    height: 150
+    width: 150
+  tracker-list:
+  - 39.106.123.27:22122
